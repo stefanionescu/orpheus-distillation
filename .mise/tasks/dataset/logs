@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#MISE description="Follow the dataset generation log"
+set -euo pipefail
+
+ROOT_FOLDER="${MISE_PROJECT_ROOT:-$(git rev-parse --show-toplevel)}"
+cd "${ROOT_FOLDER}"
+
+bash scripts/logs.sh dataset

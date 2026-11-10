@@ -1,0 +1,44 @@
+# Environment
+.env
+.venv/
+.mise.local.toml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Node
+node_modules/
+
+# Generated datasets and training output
+/dataset_output/
+/training_output/
+.cache/
+*.tar
+*.wav
+*.mp3
+
+# Process records and logs
+.run/
+logs/
+*.log
+
+# Editors and systems
+.idea/
+.vscode/
+.cursor/
+.claude/
+*.swp
+*.swo
+*~
+.DS_Store

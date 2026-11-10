@@ -1,0 +1,48 @@
+[project]
+name = "orpheus-distillation"
+version = "1.0.0"
+description = "Distills Orpheus TTS voices into other speech models"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.12",
+]
+dependencies = []
+optional-dependencies.dataset = [
+  "httpx2==2.16.0",
+  "huggingface-hub==2.4.0",
+  "numpy==2.5.4",
+  "tqdm==4.70.1",
+  "websockets==17.4",
+]
+optional-dependencies.train = [
+  "einops==0.8.2",
+  "httpx2==2.16.0",
+  "huggingface-hub==2.4.0",
+  "numpy==2.5.4",
+  "pydantic==2.14.3",
+  "safetensors==0.8.0",
+  "soundfile==0.14.0",
+  "tensorboardx==2.6.5",
+  "torch==2.15.0",
+  "torchaudio==2.11.1",
+  "tqdm==4.70.1",
+  "transformers==5.22.2",
+]
+
+[dependency-groups]
+dev = [
+  "pytest==9.0.3",
+  "pytest-cov==7.1",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest]
+ini_options.testpaths = [
+  "tests/suites/unit",
+  "tests/suites/integration",
+]
+ini_options.addopts = "-q"

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#MISE description="Write the training manifests and copy the tokenizer into a run folder"
+set -euo pipefail
+
+ROOT_FOLDER="${MISE_PROJECT_ROOT:-$(git rev-parse --show-toplevel)}"
+cd "${ROOT_FOLDER}"
+
+uv run --extra train python -m src.train "${1-}" prepare "${@:2}"

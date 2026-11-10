@@ -1,0 +1,292 @@
+"""Anger prompts by kind, from questions and threats to cold and accumulated anger, then long examples."""
+
+from __future__ import annotations
+
+KINDS: list[str] = [
+    # Questions expressing anger
+    "What is your problem?!",
+    "Why do you always do this to me?!",
+    "Are you trying to make me angry?!",
+    "Do you think this is some kind of joke?!",
+    "What part of 'no' don't you understand?!",
+    "How many times do I have to tell you?!",
+    "Why can't you just listen for once?!",
+    "Is it really that hard to be a decent person?!",
+    "What did I ever do to deserve this?!",
+    "Why are you like this?!",
+    "Do you even hear yourself right now?!",
+    "Are you even listening to me?!",
+    "What were you thinking?!",
+    "How stupid do you think I am?!",
+    "Why should I believe anything you say?!",
+    # Casual/Informal angry expressions
+    "Dude, what the hell?!",
+    "Bro, I'm about to lose it!",
+    "Man, you really pissed me off this time!",
+    "Yo, back off before I say something I regret!",
+    "Like, are you for real right now?",
+    "I literally cannot deal with your crap anymore!",
+    "This is so not okay, like at all!",
+    "I'm lowkey about to flip out on you!",
+    "Nah, I'm done, I'm so done with this!",
+    "You're really gonna stand there and lie to my face?",
+    "Bruh, the audacity is unreal!",
+    "I can't even with you right now, I really can't!",
+    "This is such BS and you know it!",
+    "For real, you need to check yourself!",
+    "I'm not playing around anymore, got it?",
+    # Threatening/Warning anger
+    "You're going to regret this.",
+    "Don't make me say something I'll regret.",
+    "You're walking on very thin ice right now.",
+    "Keep pushing and see what happens.",
+    "I'm warning you, back off.",
+    "You don't want to see me when I'm really angry.",
+    "This is your last warning.",
+    "Don't test me, not today.",
+    "You have no idea what you've started.",
+    "You're going to wish you hadn't done that.",
+    "Remember this moment when everything falls apart.",
+    "I will not forget this, mark my words.",
+    "You've made a very big mistake.",
+    "There will be consequences for this.",
+    "You better hope I calm down before I respond.",
+    # Betrayal anger
+    "I can't believe I ever trusted you!",
+    "You stabbed me in the back!",
+    "I defended you and you betrayed me!",
+    "How could you do this after everything?",
+    "You're dead to me after this.",
+    "I never want to see your face again!",
+    "We're done, completely done!",
+    "Our friendship is over, you hear me?",
+    "I'll never trust another word you say!",
+    "You've shown me exactly who you really are!",
+    "The person I thought I knew doesn't exist!",
+    "You're not the person I thought you were!",
+    "I feel like I don't even know you anymore!",
+    "Everything between us was a lie!",
+    "You played me for a fool!",
+    # Frustrated anger
+    "Why does nothing ever go right?!",
+    "I can't catch a break, can I?!",
+    "Everything is falling apart!",
+    "Nothing I do is ever good enough!",
+    "I'm so tired of trying and failing!",
+    "Why is everything so difficult?!",
+    "I just want one thing to work out!",
+    "Is it too much to ask for basic competence?!",
+    "Why does this always happen to me?!",
+    "I'm at my breaking point here!",
+    "I can't handle any more setbacks!",
+    "Every step forward is two steps back!",
+    "I'm fighting a losing battle here!",
+    "Nothing ever works the way it's supposed to!",
+    "I'm so frustrated I could scream!",
+    # Righteous anger
+    "This is completely unfair and you know it!",
+    "I won't stand for this injustice!",
+    "Someone needs to speak up and it's going to be me!",
+    "This is wrong on so many levels!",
+    "How can you just sit there and accept this?!",
+    "I refuse to be silent about this!",
+    "This is exactly what's wrong with the world!",
+    "People like you are the problem!",
+    "I'm not going to let this slide!",
+    "Someone has to hold you accountable!",
+    "You can't just get away with this!",
+    "There need to be consequences for actions like yours!",
+    "I'm standing up for what's right!",
+    "This goes against everything I believe in!",
+    "I will fight this until my last breath!",
+    # Sarcastic anger
+    "Oh, how wonderful, another disaster.",
+    "Great, just what I needed today.",
+    "Perfect, because my day wasn't bad enough already.",
+    "Thanks so much for ruining everything.",
+    "Wow, I'm so shocked you messed up again.",
+    "Oh, you're sorry? That fixes everything!",
+    "Sure, blame it on me, that makes sense.",
+    "Right, because you're never wrong.",
+    "Of course you forgot, why would I expect anything different?",
+    "Yeah, that's exactly what I wanted to hear.",
+    "Oh please, tell me more about how this isn't your fault.",
+    "Congratulations, you've outdone yourself this time.",
+    "Bravo, really impressive work here.",
+    "Well isn't this just peachy.",
+    "How delightful, another problem to deal with.",
+    # Explosive anger
+    "I'm going to explode!",
+    "I can't hold this in anymore!",
+    "I'm about to lose my mind!",
+    "I'm going to say things I can't take back!",
+    "I need to scream or I'm going to break something!",
+    "I'm shaking with anger right now!",
+    "I've never been this furious in my entire life!",
+    "My hands are literally trembling from rage!",
+    "I feel like I'm going to burst!",
+    "The anger inside me is overwhelming!",
+    "I can't contain this anymore!",
+    "I'm about to completely lose it!",
+    "Every fiber of my being is angry right now!",
+    "I'm so mad I can barely see straight!",
+    "The rage I'm feeling is indescribable!",
+    # Cold anger
+    "I'm not even going to yell. I'm past that.",
+    "You're not worth my anger anymore.",
+    "I'm done. Completely done.",
+    "I have nothing left to say to you.",
+    "Don't expect me to care anymore.",
+    "You've killed whatever I felt for you.",
+    "I'm not angry. I'm just...empty.",
+    "There's nothing you can say to fix this.",
+    "I've moved past anger into something worse.",
+    "My silence should tell you everything.",
+    "I don't have the energy to be angry anymore.",
+    "You've exhausted every ounce of patience I had.",
+    "I'm not going to fight with you. It's not worth it.",
+    "Consider this the end of our conversation.",
+    "I've said everything I need to say.",
+    # Defensive anger
+    "I didn't do anything wrong!",
+    "Stop blaming me for everything!",
+    "Why am I always the bad guy?!",
+    "You're twisting my words!",
+    "That's not what I said and you know it!",
+    "Stop putting words in my mouth!",
+    "I'm not the villain here!",
+    "Don't make me out to be the enemy!",
+    "I was trying to help and this is what I get?!",
+    "I've done nothing but support you!",
+    "How dare you accuse me of that!",
+    "I have never been anything but honest with you!",
+    "You're the one who started this, not me!",
+    "Don't you dare try to flip this on me!",
+    "I won't let you gaslight me!",
+    # Accumulated anger
+    "This has been building up for months!",
+    "I've been holding this in for way too long!",
+    "Every little thing has added up to this moment!",
+    "You think this is just about today? It's not!",
+    "This is years of frustration coming out!",
+    "I've swallowed my anger too many times!",
+    "I should have said something a long time ago!",
+    "All those times I stayed quiet are catching up!",
+    "I've bottled this up until I couldn't anymore!",
+    "This is everything I've wanted to say for years!",
+    "I've been too nice for too long!",
+    "My patience finally ran out!",
+    "I've hit my limit and there's no going back!",
+    "Every ignored boundary led to this explosion!",
+    "You've pushed me one too many times!",
+    # Specific situation anger
+    "You were late again, seriously?!",
+    "You forgot our anniversary?!",
+    "You told them my secret?!",
+    "You spent how much money?!",
+    "You invited them without asking me?!",
+    "You went through my phone?!",
+    "You lied about where you were?!",
+    "You said you'd be here and you weren't!",
+    "You promised you'd stop doing that!",
+    "You broke the one thing I asked you not to touch!",
+    "You ate my food that I specifically labeled?!",
+    "You borrowed my car without asking?!",
+    "You told everyone before you told me?!",
+    "You made plans without including me?!",
+    "You threw away my stuff?!",
+    # ADDITIONAL LONG EXAMPLES - STATEMENTS
+    (
+        "I am so incredibly angry right now that I need to take a step back before I say something that will make this "
+        "situation even worse."
+    ),
+    (
+        "The level of disrespect you've shown me today is absolutely unacceptable and I refuse to let you treat me "
+        "this way any longer."
+    ),
+    (
+        "I cannot believe that after everything we've been through together, this is how you choose to repay my "
+        "loyalty and trust."
+    ),
+    "You have absolutely no right to talk to me like that, and if you do it again, there will be serious consequences.",
+    (
+        "I've spent years building this relationship, and you managed to tear it all down in a single moment with your "
+        "thoughtless actions."
+    ),
+    (
+        "The fact that you can stand there with a straight face and deny what you did is making me even angrier than I "
+        "already was."
+    ),
+    "I am beyond furious that you went behind my back and made this decision without even consulting me first.",
+    (
+        "Every time I think about what you said, my blood boils and I have to remind myself that violence isn't the "
+        "answer."
+    ),
+    (
+        "You've pushed me to a breaking point that I didn't even know existed, and now I don't know how to come back "
+        "from this."
+    ),
+    (
+        "I trusted you with something incredibly personal, and you threw it in my face like it meant absolutely "
+        "nothing to you."
+    ),
+    (
+        "The anger I'm feeling right now is so intense that I can barely form coherent thoughts, let alone have a "
+        "civil conversation."
+    ),
+    "You have single handedly destroyed years of progress with your selfish and inconsiderate behavior.",
+    "I am done making excuses for you, I am done defending you to others, and I am done pretending like this is okay.",
+    (
+        "The way you dismissed my feelings in front of everyone was humiliating, and I will never forget how small you "
+        "made me feel."
+    ),
+    "I've never felt this level of rage before, and honestly, it scares me how angry you've managed to make me.",
+    "You knew exactly which buttons to push and you pressed every single one of them on purpose.",
+    "I am absolutely livid that you thought it was acceptable to make such a major decision without my input.",
+    "The trust between us is completely shattered, and I don't know if it can ever be repaired after what you've done.",
+    "Every fiber of my being is screaming at me to walk away right now before I do something I'll regret.",
+    "You have no idea the damage you've caused, and the worst part is you don't even seem to care.",
+    # ADDITIONAL LONG EXAMPLES - QUESTIONS
+    "How could you possibly think that was an acceptable thing to do after everything I've done for you?",
+    "What makes you believe you have the right to treat me like this when I've never treated you that way?",
+    "Do you have any idea how much pain you've caused me with your thoughtless words and actions?",
+    "Why do you continue to disrespect me when I've made it abundantly clear that this behavior is unacceptable?",
+    (
+        "How many more times are you going to break your promises before you realize I've stopped believing anything "
+        "you say?"
+    ),
+    "What did I ever do to deserve being treated like I'm worthless and my feelings don't matter?",
+    "Do you seriously expect me to just forgive and forget after the way you've behaved?",
+    "Why should I trust you again when you've proven time and time again that you can't be trusted?",
+    "How do you sleep at night knowing the kind of person you've become and the hurt you've caused?",
+    "What goes through your mind when you deliberately do things you know will make me angry?",
+    "Why is it so difficult for you to show me the same respect that I consistently show you?",
+    "Do you understand that your actions have consequences that extend far beyond this single moment?",
+    "How am I supposed to move forward when you keep dragging me back into the same toxic patterns?",
+    "What part of 'I'm angry' do you not understand, because I feel like I'm speaking a different language?",
+    "Why do you always have to push things to the point where I completely lose my composure?",
+    # ADDITIONAL LONG EXAMPLES - EXCLAMATIONS
+    "I am absolutely seething right now and you need to give me space before this gets even worse!",
+    "The audacity you have to stand there and act like you've done nothing wrong is absolutely infuriating!",
+    "I have never been so angry in my entire life, and it's all because of your complete lack of consideration!",
+    "You have completely ruined what could have been a perfect day with your selfish and thoughtless behavior!",
+    "I cannot believe I wasted so much of my life on someone who clearly doesn't care about my feelings!",
+    "The disrespect you've shown me today is something I will never forget, no matter how much you apologize!",
+    "I am so furious right now that I can barely see straight, and you're just standing there like nothing happened!",
+    "You've crossed a line that should never have been crossed, and there's no going back from this!",
+    "I gave you everything I had and this is how you repay me, with lies and betrayal!",
+    "The nerve you have to try and turn this around on me when you're the one who caused all of this!",
+    "I am done being the bigger person, done being patient, and done pretending like your behavior is acceptable!",
+    (
+        "You have absolutely no idea how lucky you are that I'm choosing to walk away instead of saying what I really "
+        "think!"
+    ),
+    "I've spent years trying to make this work, and in one moment you've proven that it was all a complete waste!",
+    "The fact that you can't even acknowledge what you did wrong makes me angrier than the original offense!",
+    "I am so incredibly disappointed and angry that I don't even know which emotion is stronger right now!",
+    "You've managed to take something beautiful and destroy it completely with your thoughtless actions!",
+    "I trusted you more than anyone and you used that trust as a weapon against me!",
+    "The anger I feel towards you right now is something I've never experienced with anyone else in my life!",
+    "I cannot believe I have to explain basic human decency to you like you're a child who doesn't know better!",
+    "You've shown me exactly who you really are, and I'm furious at myself for not seeing it sooner!",
+]

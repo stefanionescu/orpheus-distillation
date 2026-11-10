@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#MISE description="Publish an existing dataset folder to the Hugging Face Hub"
+set -euo pipefail
+
+ROOT_FOLDER="${MISE_PROJECT_ROOT:-$(git rev-parse --show-toplevel)}"
+cd "${ROOT_FOLDER}"
+
+uv run --extra dataset python -m src.dataset --publish-only "$@"

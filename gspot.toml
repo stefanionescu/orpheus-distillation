@@ -1,0 +1,178 @@
+# Change these settings with `gspot set`, `unset`, `ignore`, or `unignore`, and the configurations with `gspot add` or `remove`.
+# Run gspot list settings to see each setting. Records such as [[scope]] and [[command_check]] are written by hand.
+level = "all"
+configurations = ["bash", "markdown", "python", "pytest", "licenses"]
+
+[ci]
+enabled = true
+setup_command = ["uv", "sync", "--locked", "--all-extras"]
+
+[format]
+indent_width = 2
+print_width = 80
+quotes = "double"
+override = [{ paths = ["**/*.py"], indent_width = 4, print_width = 120 }]
+
+[limits]
+max_function_parameters = 5
+
+[structure]
+environment_readers = [
+  "scripts/lib/environment.sh",
+  "src/dataset/settings.py",
+  "src/train/settings.py",
+  "tests/**",
+]
+
+[licenses]
+allowed = [
+  "0BSD",
+  "Apache-2.0",
+  "BSD-2-Clause",
+  "BSD-3-Clause",
+  "BSL-1.0",
+  "CC0-1.0",
+  "CNRI-Python",
+  "ISC",
+  "MIT",
+  "MIT-0",
+  "MIT-CMU",
+  "PSF-2.0",
+  "Python-2.0",
+  "Unlicense",
+  "Zlib",
+]
+
+[spelling]
+allowed_words = { VoxCPM = "The name of the target model, OpenBMB VoxCPM 1.5.", voxcpm = "The lowercase form of VoxCPM in folder names and the pip package.", OpenBMB = "The organization that publishes VoxCPM.", Orpheus = "Orpheus TTS is the source model the dataset distills.", LoRA = "Low-rank adaptation, the fine-tuning method the training command uses.", lora = "The lowercase form of LoRA in identifiers and paths.", WebDataset = "The shard format of the dataset.", tara = "The Orpheus speaker that the female voice maps to.", zac = "The Orpheus speaker that the male voice maps to.", TTS = "Text to speech.", PCM = "The sample encoding of the audio clips.", WAV = "The audio container of the clips.", kHz = "The unit of the sample rate in the docs.", MiniCPM = "The language model inside VoxCPM.", locdit = "The local diffusion transformer module of the vendored model.", locenc = "The local encoder module of the vendored model.", audiovae = "The audio variational autoencoder module of the vendored model.", FSQ = "Finite scalar quantization, a layer of the model.", CFM = "Conditional flow matching, the sampler of the model.", DiT = "Diffusion transformer.", HF = "Hugging Face, in the docs and the token names.", CUDA = "The GPU platform the training command needs.", GPU = "Graphics processing unit.", yapwithai = "The Hugging Face owner of the published dataset and model.", Distillation = "The last word of the project name, Orpheus Distillation, which the README title writes in title case." }
+
+[python]
+docstring_convention = "google"
+
+[tools]
+ruff = { rules = ["D102", "D103"] }
+
+[[import_rule]]
+name = "schemas-shared"
+paths = ["schemas/__init__.py", "schemas/voice.py", "schemas/record.py", "schemas/settings.py"]
+can_import = []
+
+[[import_rule]]
+name = "schemas-dataset"
+paths = ["schemas/dataset/**"]
+can_import = ["schemas-shared"]
+
+[[import_rule]]
+name = "schemas-voxcpm-1-5"
+paths = ["schemas/voxcpm_1_5/**"]
+can_import = ["schemas-shared"]
+
+[[import_rule]]
+name = "config-shared"
+paths = ["config/__init__.py", "config/voices.py", "config/audio.py", "config/shards.py", "config/hub.py"]
+can_import = ["schemas-shared"]
+
+[[import_rule]]
+name = "config-prompts"
+paths = ["config/prompts/**"]
+can_import = []
+
+[[import_rule]]
+name = "config-dataset"
+paths = ["config/dataset/**"]
+can_import = []
+
+[[import_rule]]
+name = "config-voxcpm-1-5"
+paths = ["config/voxcpm_1_5/**"]
+can_import = []
+
+[[import_rule]]
+name = "model-voxcpm-1-5"
+paths = ["src/train/voxcpm_1_5/model/**"]
+can_import = ["schemas-voxcpm-1-5"]
+
+[[import_rule]]
+name = "dataset"
+paths = ["src/dataset/**"]
+can_import = ["schemas-shared", "schemas-dataset", "config-shared", "config-prompts", "config-dataset"]
+
+[[import_rule]]
+name = "train-entry"
+paths = ["src/train/__main__.py"]
+can_import = ["train-voxcpm-1-5", "train"]
+
+[[import_rule]]
+name = "train-voxcpm-1-5"
+paths = ["src/train/voxcpm_1_5/**"]
+can_import = ["schemas-shared", "schemas-voxcpm-1-5", "config-shared", "config-voxcpm-1-5", "model-voxcpm-1-5", "train"]
+
+[[import_rule]]
+name = "train"
+paths = ["src/__init__.py", "src/train/**"]
+can_import = ["schemas-shared", "config-shared"]
+
+[[import_rule]]
+name = "tests-state"
+paths = ["tests/state/**"]
+can_import = ["schemas-shared", "schemas-dataset", "schemas-voxcpm-1-5"]
+
+[[import_rule]]
+name = "tests-harness"
+paths = ["tests/harness/**"]
+can_import = ["schemas-shared", "schemas-dataset", "schemas-voxcpm-1-5", "config-shared", "config-dataset", "config-voxcpm-1-5", "dataset", "train-voxcpm-1-5", "train", "tests-state"]
+
+[[import_rule]]
+name = "tests"
+paths = ["tests/**"]
+can_import = ["train-entry", "schemas-shared", "schemas-dataset", "schemas-voxcpm-1-5", "config-shared", "config-prompts", "config-dataset", "config-voxcpm-1-5", "model-voxcpm-1-5", "dataset", "train-voxcpm-1-5", "train", "tests-state", "tests-harness"]
+
+# The only ignore; every other finding is fixed.
+[[ignore]]
+check = "spelling/typos"
+paths = ["config/prompts/**"]
+reason = "Real misspellings were fixed in the corpus commit; what remains is slang and dialect spelling that the voices read aloud on purpose, so changing it changes the dataset."
+
+[[naming.exception]]
+paths = ["**/voxcpm_1_5/**"]
+categories = ["folders", "files"]
+allow_digits = true
+allowed_names = ["voxcpm_1_5"]
+reason = "The upstream model is OpenBMB VoxCPM 1.5; VoxCPM 2.0 has a different architecture, so the version in the package name is information."
+
+[[naming.exception]]
+paths = ["**/minicpm4/**"]
+categories = ["folders", "files"]
+allow_digits = true
+reason = "The upstream language model is MiniCPM4; the folder keeps its name."
+
+[[naming.exception]]
+paths = ["tests/**"]
+languages = ["python"]
+allowed_names = ["tmp_path"]
+reason = "pytest injects this fixture by its exact name."
+
+[[licenses.allowed_package]]
+name = "{colorama,jinja2,sympy,torchaudio}"
+version = "*"
+reason = "BSD, per the license classifier on PyPI. deps.dev reports these as non-standard."
+
+[[licenses.allowed_package]]
+name = "{safetensors,tokenizers}"
+version = "*"
+reason = "Apache-2.0, per the license classifier on PyPI. deps.dev reports these as non-standard."
+
+[[licenses.allowed_package]]
+name = "torch"
+version = "*"
+reason = "Every term of its license expression is allowed except Apache-2.0 WITH LLVM-exception, which gspot cannot list as one license ID."
+
+[[licenses.allowed_package]]
+name = "tqdm"
+version = "*"
+reason = "MPL-2.0 AND MIT. MPL-2.0 stays off the allowed list, so a new MPL package gets reviewed."
+
+[[licenses.allowed_package]]
+name = "{cuda-toolkit,nvidia-*}"
+version = "*"
+reason = "NVIDIA software license. The CUDA meta-package and runtime libraries that the Linux torch wheel depends on publish no license data on PyPI."

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#MISE description="Run the e2e training and sample tests on a CUDA GPU"
+set -euo pipefail
+
+ROOT_FOLDER="${MISE_PROJECT_ROOT:-$(git rev-parse --show-toplevel)}"
+cd "${ROOT_FOLDER}"
+
+uv run --all-extras pytest tests/suites/e2e/voxcpm_1_5 "$@"

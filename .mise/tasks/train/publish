@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#MISE description="Publish a trained run to the Hugging Face Hub"
+set -euo pipefail
+
+ROOT_FOLDER="${MISE_PROJECT_ROOT:-$(git rev-parse --show-toplevel)}"
+cd "${ROOT_FOLDER}"
+
+uv run --extra train python -m src.train "${1-}" publish "${@:2}"

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#MISE description="Stop the background training pipeline"
+set -euo pipefail
+
+ROOT_FOLDER="${MISE_PROJECT_ROOT:-$(git rev-parse --show-toplevel)}"
+cd "${ROOT_FOLDER}"
+
+bash scripts/stop.sh train

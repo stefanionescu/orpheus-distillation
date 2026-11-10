@@ -1,0 +1,48 @@
+"""Tired prompts: jealous exhaustion and philosophical ravings."""
+
+from __future__ import annotations
+
+RAVINGS: list[str] = [
+    # JEALOUS EXHAUSTION
+    "I am consumed with envy for anyone who slept last night! Burning jealous rage!",
+    "How dare you look well rested! How dare you! I want what you have!",
+    "I am jealous of babies! They nap whenever they want! No one expects anything of them!",
+    "I hate how rested everyone else looks! It is offensive! Personally insulting!",
+    "I would steal your sleep if I could! Take it right from your well rested body!",
+    "I am jealous of cats! Sleeping eighteen hours a day! What a life! What injustice!",
+    "Everyone else gets to be rested and I am here suffering! It is not fair!",
+    "I am green with envy! Actually green! Or maybe that is the exhaustion!",
+    "I covet your energy! Your alertness! The clarity in your well rested eyes!",
+    "I am jealous of past me who used to sleep well! That person had everything!",
+    "How can you smile like that! So alert! So awake! I am drowning in jealousy!",
+    "I want your secret! Tell me how you sleep so well! I need it! Give it to me!",
+    "I am jealous of hibernating animals! Months of sleep! Imagine the luxury!",
+    "Your bright eyes offend me! Your energy is a personal attack! I am so jealous!",
+    "I am jealous of fictional characters who never seem to need sleep! So lucky!",
+    "I would trade lives with anyone who slept eight hours! Anyone at all! Take my life!",
+    "I am jealous of the dead! At least they get eternal rest! No more exhaustion!",
+    "Your yawns are fake! You are not really tired! You do not know what tired means!",
+    "I am jealous of my own dreams for experiencing rest I cannot feel when awake!",
+    "Everyone living their best rested life while I suffer! The jealousy is consuming me!",
+    # PHILOSOPHICAL TIRED RAVINGS
+    "What if sleep is the true reality and waking is the dream! A terrible exhausting dream!",
+    "I have achieved enlightenment through exhaustion! The truth is everything is meaningless!",
+    "Sleep is the great equalizer! The rich and poor both need it! And I have neither!",
+    "I ponder the nature of rest! Is it surrender or victory! Too tired to conclude!",
+    "The exhausted mind sees truths the rested mind cannot! Or maybe that is delirium!",
+    "What is energy but borrowed time from sleep! And I am in deep debt!",
+    "I have seen beyond the veil of consciousness! And behind it is just more tired!",
+    "Sleep is the cousin of death! And I am desperately seeking that cousin!",
+    "The boundary between waking and sleeping has dissolved! I exist in both and neither!",
+    "I question the very nature of existence while too tired to process the answers!",
+    "What is the self when the self is exhausted! Am I still me! Who am I!",
+    "Time is a construct and that construct is keeping me from my bed!",
+    "I have transcended the need for coherent thought! Exhaustion philosophy has no rules!",
+    "The universe expands and so does my exhaustion! Both infinite! Both cold!",
+    "What is consciousness but the curse of knowing how tired you are!",
+    "I have pondered meaning and found it in rest! All paths lead to the pillow!",
+    "The ancient philosophers never addressed exhaustion this profound! Amateurs!",
+    "I am experiencing ego death through tiredness! The self dissolves into fatigue!",
+    "What remains when all energy is spent! Just this! This pure tired existence!",
+    "I have touched the infinite void and it feels exactly like being this exhausted!",
+]

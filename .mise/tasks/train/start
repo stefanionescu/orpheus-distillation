@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#MISE description="Start the training pipeline of a model in the background and follow its log"
+set -euo pipefail
+
+ROOT_FOLDER="${MISE_PROJECT_ROOT:-$(git rev-parse --show-toplevel)}"
+cd "${ROOT_FOLDER}"
+
+bash scripts/train.sh "$@"

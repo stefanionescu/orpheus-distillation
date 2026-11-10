@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#MISE description="Check that uv.lock matches pyproject.toml, then sync"
+set -euo pipefail
+
+ROOT_FOLDER="${MISE_PROJECT_ROOT:-$(git rev-parse --show-toplevel)}"
+cd "${ROOT_FOLDER}"
+
+uv lock --check
+: "${UV_PYTHON:?set by mise.toml}"
+uv sync --python "${UV_PYTHON}" --all-extras --frozen

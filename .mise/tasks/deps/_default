@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#MISE description="Sync every extra into .venv"
+set -euo pipefail
+
+ROOT_FOLDER="${MISE_PROJECT_ROOT:-$(git rev-parse --show-toplevel)}"
+cd "${ROOT_FOLDER}"
+
+: "${UV_PYTHON:?set by mise.toml}"
+uv sync --python "${UV_PYTHON}" --all-extras --frozen

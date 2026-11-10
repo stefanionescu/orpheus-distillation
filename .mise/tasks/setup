@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#MISE description="Install the pinned tools, sync .venv, and install the gspot tools"
+set -euo pipefail
+
+ROOT_FOLDER="${MISE_PROJECT_ROOT:-$(git rev-parse --show-toplevel)}"
+cd "${ROOT_FOLDER}"
+
+mise install
+mise run deps
+mise exec -- gspot install

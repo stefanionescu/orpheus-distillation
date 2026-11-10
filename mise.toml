@@ -1,0 +1,16 @@
+[tools]
+node = "24.20.0"
+python = "3.12"
+uv = "latest"
+"npm:@gspothq/cli" = { version = "0.4.0", allow_low_downloads = "true" }
+
+[env]
+_.file = ".env"
+UV_PYTHON = "3.12"
+
+[settings]
+github_attestations = false
+not_found_auto_install = false
+
+[settings.task]
+run_auto_install = false
