@@ -19,9 +19,8 @@ under `src/train/`, and `python -m src.train MODEL COMMAND` runs it.
 - [Publish](#publish)
 - [Resume a stopped run](#resume-a-stopped-run)
 - [Output files](#output-files)
-- [Code layers](#code-layers)
 - [Add a target model](#add-a-target-model)
-- [Develop the project](#develop-the-project)
+- [Run the tests](#run-the-tests)
 - [Troubleshoot](#troubleshoot)
 - [License](#license)
 
@@ -47,7 +46,7 @@ file names hold the speaker, and shard records hold both.
 
 ## Requirements
 
-- `mise`, which installs the pinned Python, `uv`, Node, and gspot.
+- `mise`, which installs the pinned Python and `uv`.
 - For the dataset: an Orpheus TTS server that the host reaches over WebSocket,
   and its API key.
 - For training: Linux with a CUDA GPU and `nvidia-smi`.
@@ -243,8 +242,7 @@ The dataset output folder, `dataset_output` by default:
 | `fingerprint.json`                 | The prompt hash and voices that `--resume` checks. |
 
 Each JSON record holds `text`, `speaker`, `voice`, `duration` in seconds, and
-`leading_silence_ms`. `schemas/record.py` defines it; both commands read it from
-there.
+`leading_silence_ms`.
 
 A training run folder, `training_output/<run-name>` by default:
 
@@ -258,37 +256,17 @@ A training run folder, `training_output/<run-name>` by default:
 | `samples/`                         | Sample clips of each voice.                                  |
 | `staging/`                         | The files that a publish uploads.                            |
 
-## Code layers
-
-| Folder                        | Holds                                                                                                                              |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `config/`                     | Constants: voices, the audio format, shard names, Hub repositories, the prompt corpus, and the settings of each command and model. |
-| `schemas/`                    | Frozen dataclasses that modules pass to each other, such as the clip record and the training settings.                             |
-| `src/dataset/`                | The dataset command.                                                                                                               |
-| `src/train/`                  | The training entry point, the modules every model shares, and one package per model.                                               |
-| `src/train/voxcpm_1_5/model/` | The vendored VoxCPM 1.5 model. `UPSTREAM.md` names its source and changes.                                                         |
-| `scripts/`                    | The shell scripts behind the background tasks.                                                                                     |
-| `tests/`                      | Fakes in `harness/`, the calls they receive in `state/`, and the unit, integration, and e2e suites in `suites/`.                   |
-
-The `[[import_rule]]` entries in `gspot.toml` set the import direction. The
-dataset and training packages never import each other, and `config/` and
-`schemas/` import no code.
-
 ## Add a target model
 
 1. Add `config/<model>/`, `schemas/<model>/`, and `src/train/<model>/`. The
    package's `__main__.py` exposes `main()`, which runs its commands.
 1. Add the model to `MODELS` in `src/train/__main__.py`.
-1. Add import rules for the new folders to `gspot.toml`, each named after its
-   layer and the model, such as `train-voxcpm-1-5`.
 1. Add its tests to `tests/suites/unit/<model>/` and `tests/suites/e2e/<model>/`.
 1. Add the model to the table in [Models and voices](#models-and-voices).
 
-## Develop the project
+## Run the tests
 
 ```shell
-mise run deps:verify
-mise exec -- gspot check
 mise run test
 ```
 

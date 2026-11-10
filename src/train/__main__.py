@@ -12,7 +12,7 @@ from src.train.voxcpm_1_5.__main__ import main as run_voxcpm_1_5
 if TYPE_CHECKING:
     from collections.abc import Callable, Sequence
 
-# The target models, in the order the docs list them. Add a new model as a package under src/train/ and one entry here.
+# One entry per target model package under src/train/.
 MODELS: MappingProxyType[str, Callable[[Sequence[str] | None], int]] = MappingProxyType(
     {
         "voxcpm_1_5": run_voxcpm_1_5,
