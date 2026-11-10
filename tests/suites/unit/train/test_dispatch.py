@@ -9,8 +9,8 @@ from src.train.cli import EXIT_SUCCESS
 from tests.state.hub import DownloadCall
 from tests.harness.hub import install_fake_hub
 from src.train.__main__ import main as run_training_command
-from config.voxcpm_1_5.hub import BASE_MODEL_REPO
 from tests.suites.unit.builders import read_results
+from config.models.voxcpm_1_5.hub import BASE_MODEL_REPO
 
 if TYPE_CHECKING:
     from pathlib import Path

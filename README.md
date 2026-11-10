@@ -7,7 +7,7 @@ fine-tunes a target model on those shards, with one LoRA adapter per voice, and
 publishes the adapters.
 
 The training code does not depend on one model. Each target model is a package
-under `src/train/`, and `python -m src.train MODEL COMMAND` runs it.
+under `src/train/models/`, and `python -m src.train MODEL COMMAND` runs it.
 
 ## Contents
 
@@ -258,10 +258,12 @@ A training run folder, `training_output/<run-name>` by default:
 
 ## Add a target model
 
-1. Add `config/<model>/`, `schemas/<model>/`, and `src/train/<model>/`. The
-   package's `__main__.py` exposes `main()`, which runs its commands.
+1. Add `config/models/<model>/`, `schemas/models/<model>/`, and
+   `src/train/models/<model>/`. The package's `__main__.py` exposes `main()`,
+   which runs its commands.
 1. Add the model to `MODELS` in `src/train/__main__.py`.
-1. Add its tests to `tests/suites/unit/<model>/` and `tests/suites/e2e/<model>/`.
+1. Add its tests to `tests/suites/unit/models/<model>/` and
+   `tests/suites/e2e/models/<model>/`.
 1. Add the model to the table in [Models and voices](#models-and-voices).
 
 ## Run the tests

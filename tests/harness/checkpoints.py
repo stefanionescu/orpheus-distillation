@@ -5,9 +5,9 @@ from __future__ import annotations
 import json
 from typing import TYPE_CHECKING
 
-from config.voxcpm_1_5.data import TOKENIZER_FILES, TRAIN_MANIFEST_FILE
-from schemas.voxcpm_1_5.training import LoraSettings, TrainingFolders, TrainingSettings
-from config.voxcpm_1_5.checkpoints import (
+from config.models.voxcpm_1_5.data import TOKENIZER_FILES, TRAIN_MANIFEST_FILE
+from schemas.models.voxcpm_1_5.training import LoraSettings, TrainingFolders, TrainingSettings
+from config.models.voxcpm_1_5.checkpoints import (
     NEWEST_LINK,
     STEP_TEMPLATE,
     TRAINING_STATE_FILE,

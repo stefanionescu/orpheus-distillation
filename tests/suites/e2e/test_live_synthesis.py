@@ -12,7 +12,7 @@ from src.dataset.audio.silence import detect_leading_silence_ms
 from src.dataset.cli.arguments import EXIT_SUCCESS
 from tests.suites.e2e.builders import LIVE_PROMPT_COUNT, LEADING_SILENCE_MARGIN_MS, read_live_server
 from src.dataset.generation.tasks import build_tasks, build_output_folders
-from src.train.voxcpm_1_5.data.manifest import write_manifests, read_voice_entries
+from src.train.models.voxcpm_1_5.data.manifest import write_manifests, read_voice_entries
 
 if TYPE_CHECKING:
     from pathlib import Path

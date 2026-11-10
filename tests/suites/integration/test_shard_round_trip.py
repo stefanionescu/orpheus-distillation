@@ -10,19 +10,19 @@ from config.audio import SAMPLE_RATE
 from src.train.cli import EXIT_SUCCESS
 from tests.harness.voices import FIRST_VOICE, SECOND_VOICE, TABLE_VOICES
 from tests.harness.records import build_record
-from config.voxcpm_1_5.data import TOKENIZER_FILES
-from config.voxcpm_1_5.model import MODEL_SAMPLE_RATE
 from tests.harness.checkpoints import write_tokenizer_files
-from src.train.voxcpm_1_5.commands import prepare
+from config.models.voxcpm_1_5.data import TOKENIZER_FILES
+from config.models.voxcpm_1_5.model import MODEL_SAMPLE_RATE
 from tests.suites.integration.builders import write_dataset
-from src.train.voxcpm_1_5.data.manifest import write_manifests, read_voice_entries
-from src.train.voxcpm_1_5.training.dataset import ManifestDataset
+from src.train.models.voxcpm_1_5.commands import prepare
+from src.train.models.voxcpm_1_5.data.manifest import write_manifests, read_voice_entries
+from src.train.models.voxcpm_1_5.training.dataset import ManifestDataset
 
 if TYPE_CHECKING:
     import pytest
 
     from schemas.record import Record
-    from schemas.voxcpm_1_5.manifest import ManifestEntry
+    from schemas.models.voxcpm_1_5.manifest import ManifestEntry
 
 SMALL_CLIPS_PER_SHARD = 3
 """Below the clip count, so the dataset spans two shards and the reader reads both."""

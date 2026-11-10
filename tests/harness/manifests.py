@@ -6,8 +6,8 @@ from typing import TYPE_CHECKING
 
 from tests.harness.shards import encode_tone_wav
 from tests.harness.records import CLIP_TEXT, CLIP_SECONDS
-from schemas.voxcpm_1_5.manifest import ManifestEntry
-from src.train.voxcpm_1_5.data.manifest import write_manifest
+from schemas.models.voxcpm_1_5.manifest import ManifestEntry
+from src.train.models.voxcpm_1_5.data.manifest import write_manifest
 
 if TYPE_CHECKING:
     from pathlib import Path

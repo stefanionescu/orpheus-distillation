@@ -54,7 +54,7 @@ ruff = { rules = ["D102", "D103"] }
 
 [[import_rule]]
 name = "schemas-shared"
-paths = ["schemas/__init__.py", "schemas/voice.py", "schemas/record.py", "schemas/settings.py"]
+paths = ["schemas/__init__.py", "schemas/models/__init__.py", "schemas/voice.py", "schemas/record.py", "schemas/settings.py"]
 can_import = []
 
 [[import_rule]]
@@ -64,12 +64,12 @@ can_import = ["schemas-shared"]
 
 [[import_rule]]
 name = "schemas-voxcpm-1-5"
-paths = ["schemas/voxcpm_1_5/**"]
+paths = ["schemas/models/voxcpm_1_5/**"]
 can_import = ["schemas-shared"]
 
 [[import_rule]]
 name = "config-shared"
-paths = ["config/__init__.py", "config/voices.py", "config/audio.py", "config/shards.py", "config/hub.py"]
+paths = ["config/__init__.py", "config/models/__init__.py", "config/voices.py", "config/audio.py", "config/shards.py", "config/hub.py"]
 can_import = ["schemas-shared"]
 
 [[import_rule]]
@@ -84,12 +84,12 @@ can_import = []
 
 [[import_rule]]
 name = "config-voxcpm-1-5"
-paths = ["config/voxcpm_1_5/**"]
+paths = ["config/models/voxcpm_1_5/**"]
 can_import = []
 
 [[import_rule]]
 name = "model-voxcpm-1-5"
-paths = ["src/train/voxcpm_1_5/model/**"]
+paths = ["src/train/models/voxcpm_1_5/model/**"]
 can_import = ["schemas-voxcpm-1-5"]
 
 [[import_rule]]
@@ -104,7 +104,7 @@ can_import = ["train-voxcpm-1-5", "train"]
 
 [[import_rule]]
 name = "train-voxcpm-1-5"
-paths = ["src/train/voxcpm_1_5/**"]
+paths = ["src/train/models/voxcpm_1_5/**"]
 can_import = ["schemas-shared", "schemas-voxcpm-1-5", "config-shared", "config-voxcpm-1-5", "model-voxcpm-1-5", "train"]
 
 [[import_rule]]

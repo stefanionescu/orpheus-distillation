@@ -7,12 +7,12 @@ from typing import TYPE_CHECKING
 import argparse
 
 from src.train.cli import build_parser
-from src.train.voxcpm_1_5.__main__ import main as run_voxcpm_1_5
+from src.train.models.voxcpm_1_5.__main__ import main as run_voxcpm_1_5
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Sequence
 
-# One entry per target model package under src/train/.
+# One entry per target model package under src/train/models/.
 MODELS: MappingProxyType[str, Callable[[Sequence[str] | None], int]] = MappingProxyType(
     {
         "voxcpm_1_5": run_voxcpm_1_5,
