@@ -10,7 +10,8 @@ if TYPE_CHECKING:
 
     import pytest
 
-HF_TOKEN = "hf-test-token"
+# reason: The value is a made-up token that only the tests set, so it grants no access.
+HF_TOKEN = "hf-test-token"  # noqa: S105
 SERVER_URL_VARIABLE = "ORPHEUS_SERVER_URL"
 API_KEY_VARIABLE = "ORPHEUS_API_KEY"
 CACHE_FOLDER_VARIABLE = "VOXCPM_CACHE_FOLDER"

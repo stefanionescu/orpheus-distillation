@@ -1,7 +1,14 @@
 # Change these settings with `gspot set`, `unset`, `ignore`, or `unignore`, and the configurations with `gspot add` or `remove`.
 # Run gspot list settings to see each setting. Records such as [[scope]] and [[command_check]] are written by hand.
 level = "all"
-configurations = ["bash", "markdown", "python", "pytest", "licenses"]
+configurations = [
+  "bash",
+  "markdown",
+  "python",
+  "pytest",
+  "licenses",
+  "machine-learning",
+]
 
 [ci]
 enabled = true
